@@ -1,0 +1,51 @@
+
+* untyped lambda calculus with stuff -- 5 min
+  bla bla church-tall og andre tall
+  install npm
+
+* + -- 5 min
+  med add1, sub1, =, som i little schemer
+  (slide, bilde av en bok)
+  problemer! fordi ikke generell rekursjon
+  λa.λb.if (= a 0) b (add1 (____ (sub1 a) b))
+
+* hva er rekursjon? -- 5 min
+  bla bla snakke om seg selv
+  induksjonsbevis, kanskje wishful thinking
+  kan kopiere selv:
+  λa.λb.if (= a 0) b (add1 ((λa.λb.if (= a 0) b (add1 (____ (sub1 a) b))) (sub1 a) b))
+  kan lage så bra pluss-funksjon som man trenger. YAGNI.
+
+* logikk, typeteori -- 5 min
+  bla bla logikk. lambda calculus skulle egentlig og hadde tenkt til at
+  bevise usannhet litt som evig løkke
+  noen heiv på masse typesystemer for å la vær
+  finn noe et typesystem ikke liker
+  enkle eksempler
+  λx.x, λa.λb.a, ..., går fint
+  λx.x x ... :(
+  typesjekker sier bla bla uendelig
+  (λx.x x) foo, etc
+  går fint
+  (λx.x x) (λx.x x)
+  går lenge
+* + -- 15 min
+  det er den andre som blir kopiert:
+  (λx.x x) (λx.foo (x x))
+  (λx.foo (x x)) (λx.foo (x x))
+  foo ((λx.foo (x x)) (λx.foo (x x)))
+  foo (foo ((λx.foo (x x)) (λx.foo (x x))))
+  ...
+  ((λx.x x) (λx.(λself.λa.λb.if (zero? a) b (add1 (self (sub1 a) b))) (x x)))
+* Y -- 5 min
+  kan pluss-delen være argument til en generell funksjon?
+  Y' ≜ λf.(λx.x x) (λx.f (x x))
+  Y ≜ λf.(λx.f (x x)) (λx.f (x x))
+  plus' ≜ λself.λa.λb.if (= a 0) b (add1 (self (sub1 a) b))
+  plus ≜ Y plus'
+* Real-World eksempler -- 5 min
+  -
+  *
+  triangler
+  fib
+  fizzbuzz?
