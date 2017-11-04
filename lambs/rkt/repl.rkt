@@ -12,6 +12,12 @@
 
 (define num-parse (compose numify parse))
 
+(define (border n)
+  (string-join (build-list n (λ (x) "=^..^="))
+               "   "
+               #:before-first " "
+               #:after-last " "))
+
 
 (define ((write-stuff img scal) x)
   (write 
@@ -27,9 +33,12 @@
     [(list _ c r) (cons c r)]
     [#f (cons s "")]))
 
+(struct config (scale border-length) #:transparent)
+
 (define (repl img [scal 3/2])
-  ((write-stuff img scal) (format ":scale ~a~n" scal))
-  (let loop ([it ":)"] [scal scal] [ds (defs '() '())])
+  ((write-stuff img scal) "Beep boop.")
+  (let loop ([it ":)"] [conf (config scal 8)] [ds (defs '() '())])
+    (match-define (config scal blen) conf)
     (define write (write-stuff img scal))
     
     (flush-output)
@@ -40,37 +49,52 @@
         ([(λ (_) #t)
           (λ (e)
             (write (exn-message e))
-            (loop it scal ds))])
+            (loop it conf ds))])
       
            
       (match (command/rest s)
         {(cons "" "")
          (write "beep boop")
-         (loop it scal ds)}
+         (loop it conf ds)}
         
         [(cons ":scale" "")
          (write (format ":scale ~a" scal))
-         (loop it scal ds)]
+         (loop it conf ds)]
         
         [(cons ":scale" new)
          (define new-scal (string->number new))
-         ((write-stuff img new-scal) (square 40 'solid 'blue))
-         (loop it new-scal ds)]
+         ((write-stuff img new-scal) (draw-exp (lam 'x (ref 'x))))
+         (loop it (config new-scal blen) ds)]
+
+        [(cons ":border-length" "")
+         (write (format ":border-length ~a" blen))
+         (loop it conf ds)]
+        
+        [(cons ":border-length" new)
+         (define new-blen (string->number new))
+         (write (border new-blen))
+         (loop it (config scal new-blen) ds)]
 
         [(cons ":it" "")
          (write it)
-         (loop it scal ds)]
+         (loop it conf ds)]
 
         [(cons ":install" x)
          (match (hash-ref packages (string->symbol x))
            [(package n new-ds)
             (write (format "Installing ~a..." n))
-            (loop it scal new-ds)])]
+            (loop it conf new-ds)])]
 
         [(cons ":slide" x)
+         (write "")
+         (write (border blen))
+         (write "")
          (for ([y (hash-ref slides (string->symbol x))])
            (write y))
-         (loop it scal ds)]
+         (write "")
+         (write (border blen))
+         (write "")
+         (loop it conf ds)]
                
         [(cons ":q" "") (void)]
 
@@ -80,26 +104,26 @@
            (cond [top (run1 top ds)]
                  [else (write ":(")
                        ds]))
-         (loop s scal new-ds)]
+         (loop s conf new-ds)]
 
         [(cons ":run1000" exp-s)
          (define exp (num-parse exp-s))
          (if (exp? exp)
              (run 1000 exp ds)
              (write ":("))
-         (loop exp-s scal ds)]
+         (loop exp-s conf ds)]
 
         [(cons ":rename" exp-s)
          (define exp (num-parse exp-s))
          (if (exp? exp)
              (rename-defs exp ds)
              (write ":("))
-         (loop exp-s scal ds)]
+         (loop exp-s conf ds)]
 
         [(cons ":draw" exp-s)
          (define exp (parse exp-s))
-         (if (exp? exp)
-             (write (draw-exp exp))
-             (write ":("))
-         (loop exp-s scal ds)]))))
+         (write (if (exp? exp)
+                    (draw-exp exp)
+                    ":("))
+         (loop exp-s conf ds)]))))
 

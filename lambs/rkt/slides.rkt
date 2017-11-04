@@ -22,7 +22,20 @@
               ""
               "Renaming variables to avoid capture counts as one step:"
               "like,"
-              "λx.(λy.λx.y) x"))
+              "λx.(λy.λx.y) x"
+              ""
+              "..."
+              ""
+              "<C-return>: special command thing (lines that begin with :)"
+              ""
+              "some examples..."
+              ":draw (λf.λx.f x) foo bar"
+              ":scale"
+              ":scale 2"
+              ":draw (λx.x) foo"
+              ":border-length"
+              ":border-length 5"
+              ":slide hello"))
 
 (define rules (list
                "Syntax:"
