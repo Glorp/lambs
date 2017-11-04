@@ -85,6 +85,10 @@
             (write (format "Installing ~a..." n))
             (loop it conf new-ds)])]
 
+        [(cons ":defs" "")
+         (write (format "~a" ds))
+         (loop it conf ds)]
+
         [(cons ":slide" x)
          (write "")
          (write (border blen))

@@ -3,7 +3,8 @@
          "../structs.rkt")
 
 (provide update-defs
-         subst-defs)
+         subst-defs
+         make-comb)
 
 (struct comb-name (name) #:transparent)
 

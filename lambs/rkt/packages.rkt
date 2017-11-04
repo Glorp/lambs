@@ -2,7 +2,9 @@
 (require "structs.rkt"
          "eval/eval.rkt"
          "eval/subst.rkt"
-         "unparse.rkt")
+         "eval/define.rkt"
+         "unparse.rkt"
+         "parse.rkt")
 
 (provide (struct-out package)
          packages
@@ -101,14 +103,16 @@
 
 
 (define npm
-  (list (def '+ (numbin '+ +))
-        (def '- (numbin '- (λ (a b) (max 0 (- a b)))))
-        (def 'add1 (numunar 'add1 add1))
-        (def 'sub1 (numunar 'sub1 (λ (a) (max 0 (- a 1)))))
-        (def 'true tru)
-        (def 'false fal)
-        (def 'zero? (numunar 'zero? zero?))
-        (def 'if ite)))
+  (defs
+    '()
+    (list (def '+ (numbin '+ +))
+          (def '- (numbin '- (λ (a b) (max 0 (- a b)))))
+          (def 'add1 (numunar 'add1 add1))
+          (def 'sub1 (numunar 'sub1 (λ (a) (max 0 (- a 1)))))
+          (def 'true tru)
+          (def 'false fal)
+          (def 'zero? (numunar 'zero? zero?))
+          (def 'if ite))))
 
 (define (eval-halp x)
   (match (step x)
@@ -142,17 +146,22 @@
                (other (string->symbol (number->string res)) (num res)))
              '()))
 
-(define real-world (list (def 'print (other-fun 'print 1 (λ (n x) #t) prnt '()))
-                         (def '% (numbin '% remainder))
-                         (def '= (numbin '= =))
-                         (def '+ fast+)
-                         (def 'true tru)
-                         (def 'false fal)
-                         (def 'zero? (numunar 'zero? zero?))
-                         (def 'if ite)))
+(define real-world
+  (defs
+    (list (def 'Y (parse "λf.(λx.f (x x)) (λx.f (x x))")))
+    (list (def 'print (other-fun 'print 1 (λ (n x) #t) prnt '()))
+          (def '% (numbin '% remainder))
+          (def '= (numbin '= =))
+          (def '+ fast+)
+          (def 'true tru)
+          (def 'false fal)
+          (def 'zero? (numunar 'zero? zero?))
+          (def 'if ite)
+          (def 'and (make-comb 'and '(a b) (app (app (app ite (ref 'a)) (ref 'b)) fal))))))
 
 
 (struct package (name defs) #:transparent)
+
 (define packages
-  `#hash((npm . ,(package "Number Package Module" (defs '() npm)))
-         (real-world . ,(package "Real-World" (defs '() real-world)))))
+  `#hash((npm . ,(package "Number Package Module" npm))
+         (real-world . ,(package "Real-World" real-world))))

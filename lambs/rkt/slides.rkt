@@ -177,12 +177,36 @@
                  "Coq:"
                  (static-image "imgs/c.png")))
 
+(define real-world (list
+                    ":install real-world"
+                    ""
+                    "the Real-World consists of horrible and convenient things..."
+                    ""
+                    "+ 1 (+ 3 4)"
+                    ""
+                    "= (+ 1 (+ 3 4)) (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 1)))))))"
+                    ""
+                    "and (= (+ 1 (+ 3 4)) 8) (= (% 6 3) 0)"
+                    ""
+                    "print 5"
+                    ""
+                    "(λx.+ x 3) 5"
+                    ""
+                    "print ((λx.+ x 3) 5)"
+                    ""
+                    "and (print ((λx.+ x 3) 5)) (= (+ 3 2) 5)"
+                    ""
+                    ""
+                    "so:"
+                    "we're going to need some helper functions"
+                    ""
+                    ""
+                    "and a recurring thing"
+                    ""
+                    ""))
+
 (define fizzbuzz (list
                   ":install real-world"
-                  ""
-                  "and a b ≜ if a b false"
-                  ""
-                  "Y ≜ λf.(λx.f (x x)) (λx.f (x x))"
                   ""
                   "div3 ≜ λn.(= 0 (% n 3))"
                   ""
@@ -209,6 +233,7 @@
          (okay! . ,okay!)
          (small-expressions . ,small-expressions)
          (t-error . ,t-error)
-         (fizzbuzz . ,fizzbuzz)))
+         (fizzbuzz . ,fizzbuzz)
+         (real-world . ,real-world)))
 
 
