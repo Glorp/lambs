@@ -147,7 +147,6 @@
 
 (define t-error (list
                  "SML:"
-                 "Error: operator is not a function [circularity]"
                  "- fn x => x x;;"
                  "stdIn:1.10-1.13 Error: operator is not a function [circularity]"
                  "  operator: 'Z"
