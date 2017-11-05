@@ -50,12 +50,7 @@ Then, for instructions, cursor on the line below and do <C-return>:
 
 *~*~*~*~*~*~*~*~*
 
-
-
-
-*~*~*~*~*~*~*~*~*
-
-:slide plusses
+(stuff)
 
 *~*~*~*~*~*~*~*~*
 
