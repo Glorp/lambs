@@ -37,6 +37,16 @@
               ":border-length 5"
               ":slide hello"))
 
+
+(define hello (list "Hello?"
+                    ""
+                    ""
+                    "(some notes to a self:"
+                    "maybe have a DrRacket open?"
+                    "SML as well?"
+                    "border-length, textsize stuffs?)"))
+
+
 (define rules (list
                "Syntax:"
                "Exp u ::= x         variable"
@@ -177,6 +187,20 @@
                  "Coq:"
                  (static-image "imgs/c.png")))
 
+(define some-functions? (list
+                         "multiplication?"
+                         ""
+                         "triangles?"
+                         "                                            *"
+                         "                                *          * *"
+                         "                      *        * *        * * *"
+                         "              *      * *      * * *      * * * *"
+                         "        *    * *    * * *    * * * *    * * * * *"
+                         "T(0)  T(1)   T(2)    T(3)     T(4)         T(5)"
+                         ""
+                         ""
+                         "possibly fib?"))
+
 (define real-world (list
                     ":install real-world"
                     ""
@@ -205,6 +229,14 @@
                     ""
                     ""))
 
+(define Y (list "Y ≜ λf.(λx.f (x x)) (λx.f (x x))"))
+
+(define cheat (list "Y ≜ λf.(λx.f (x x)) (λx.f (x x))"
+                    "plus ≜ Y (λself.λn.λm.if (zero? m) n (add1 (self n (sub1 m))))"
+                    "mul ≜ Y (λself.λn.λm.if (zero? m) 0 (+ n (self n (sub1 m))))"
+                    "T ≜ Y (λself.λn.if (zero? n) 0 (+ n (self (sub1 n))))"
+                    "fib ≜ Y (λself.λn.if (or (zero? n) (zero? (sub1 n))) n (+ (self (- n 1)) (self (- n 2))))"))
+
 (define fizzbuzz (list
                   ":install real-world"
                   ""
@@ -221,7 +253,7 @@
                   "fb ≜ Y fb' 1"))
 
 (define slides
-  `#hash((hello . ,(list "Hello?"))
+  `#hash((hello . ,hello)
          (halp . ,halp)
          (rules . ,rules)
          (little . ,little)
@@ -234,6 +266,9 @@
          (small-expressions . ,small-expressions)
          (t-error . ,t-error)
          (fizzbuzz . ,fizzbuzz)
-         (real-world . ,real-world)))
+         (some-functions? . ,some-functions?)
+         (real-world . ,real-world)
+         (Y . ,Y)
+         (cheat . ,cheat)))
 
 

@@ -101,6 +101,8 @@
        (res->exp (f a-num))]))
   (other-fun name 1 num-acc? fun '()))
 
+(define and-def (def 'and (make-comb 'and '(a b) (app (app (app ite (ref 'a)) (ref 'b)) fal))))
+(define or-def (def 'or (make-comb 'or '(a b) (app (app (app ite (ref 'a)) tru) (ref 'b)))))
 
 (define npm
   (defs
@@ -112,7 +114,9 @@
           (def 'true tru)
           (def 'false fal)
           (def 'zero? (numunar 'zero? zero?))
-          (def 'if ite))))
+          (def 'if ite)
+          and-def
+          or-def)))
 
 (define (eval-halp x)
   (match (step x)
@@ -153,11 +157,15 @@
           (def '% (numbin '% remainder))
           (def '= (numbin '= =))
           (def '+ fast+)
+          (def '- (numbin '- (λ (a b) (max 0 (- a b)))))
+          (def 'add1 (numunar 'add1 add1))
+          (def 'sub1 (numunar 'sub1 (λ (a) (max 0 (- a 1)))))
           (def 'true tru)
           (def 'false fal)
           (def 'zero? (numunar 'zero? zero?))
           (def 'if ite)
-          (def 'and (make-comb 'and '(a b) (app (app (app ite (ref 'a)) (ref 'b)) fal))))))
+          and-def
+          or-def)))
 
 
 (struct package (name defs) #:transparent)
