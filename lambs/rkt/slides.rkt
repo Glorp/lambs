@@ -188,6 +188,14 @@
                  "Coq:"
                  (static-image "imgs/c.png")))
 
+(define summary? (list "1. type checkers tend not to like λx.x x"
+                      "2. (λx.x x) (λx.x x) goes on and on"
+                      "3. (more than) as many foos as we want"
+                      "(λx.x x) (λx.foo (x x))"
+                      "4. abstraction"
+                      "λf.(λx.x x) (λx.f (x x))"
+                      "5. eval into Y"))
+
 (define some-functions? (list
                          "multiplication?"
                          ""
@@ -266,6 +274,7 @@
          (okay! . ,okay!)
          (small-expressions . ,small-expressions)
          (t-error . ,t-error)
+         (summary? . ,summary?)
          (fizzbuzz . ,fizzbuzz)
          (some-functions? . ,some-functions?)
          (real-world . ,real-world)
