@@ -8,4 +8,4 @@ Set environment variable `HOME` to this repo-dir, cross your fingers, run Emacs,
 
 ## Can maybe just view the stuff from the Code Mesh talk without doing the Racket bits?
 
-Yes. If you checkout this branch. Run Emacs and open the [mesh.txt](lambs/mesh.txt) file, you mostly get the stuff from the talk. You still need to set HOME to the repo-dir in order to show the pictures (do `C-x C-e` on the insert-pic-expressions to insert pics), but you won't need any Racket bits for it.
+Yes. If you checkout this branch, run Emacs and open the [mesh.txt](lambs/mesh.txt) file, you mostly get the stuff from the talk. You still need to set HOME to the repo-dir in order to show the pictures (do `C-x C-e` on the insert-pic-expressions to insert pics), but you won't need any Racket bits for it.
