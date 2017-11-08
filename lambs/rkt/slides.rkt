@@ -40,6 +40,7 @@
 
 (define hello (list "Hello?"
                     ""
+                    (static-image "imgs/pudu.png")
                     ""
                     "(some notes to a self:"
                     "maybe have a DrRacket open?"
