@@ -60,31 +60,24 @@
                "[u2/x]u1"
                ""
                "e.g."
+               "(λx.x) foo"
+               ""
                "(λa.λb.λc.a c c) foo bar quux"))
 
 (define churchnums (list "nums like:"
                          "zero ≜ λf.λx.x"
                          "one ≜ λf.λx.f x"
                          "two ≜ λf.λx.f (f x)"
+                         "five ≜ λf.λx.f (f (f (f (f x))))"
                          ""
                          "some trickery:"
                          "add1 ≜ λn.λf.λx.f (n f x)"
                          ""
-                         "add1 (add1 (add1 two))"
-                         ""
-                         "but then the number kind of is its own eliminator or recursor or sth"
-                         ""
-                         "e.g. adding a and b together"
-                         "base case, a is zero, answer is b"
-                         "recursive case a is one more than sth, add one to result of sth plus b"
-                         ""
-                         "                   base"
-                         "         recursive  |"
-                         "                |   |"
-                         "                V   V"
-                         "plus ≜ λa.λb.a add1 b"
-                         ""
-                         "plus two two"))
+                         "                     base case"
+                         "         recursive case  |"
+                         "                |        |"
+                         "                V        V"
+                         "plus ≜ λa.λb.a add1      b"))
 
 (define little (list
                 (static-image "imgs/ls.png")
@@ -310,6 +303,7 @@
          (fizzbuzz . ,fizzbuzz)
          (some-functions? . ,some-functions?)
          (real-world . ,real-world)
+         (links? . ,links?)
          (Y . ,Y)
          (cheat . ,cheat)))
 

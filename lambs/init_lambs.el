@@ -48,5 +48,5 @@
   (global-set-key (kbd "<M-up>")
                   (lambda ()
                     (interactive)
-                    (process-send-string "lambproc" (format "%S\n" "#:it"))))
+                    (process-send-string "lambproc" (format "%S\n" ":it"))))
   (insert "\n"))

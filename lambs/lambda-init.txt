@@ -32,7 +32,9 @@ Then, for instructions, cursor on the line below and do <C-return>:
 
 :slide plus
 
+:slide churchnums
 
+*~*~*~*~*~*~*~*~*
 
 :slide plusses
 
