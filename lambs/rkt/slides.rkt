@@ -61,6 +61,30 @@
                "e.g."
                "(λa.λb.λc.a c c) foo bar quux"))
 
+(define churchnums (list "nums like:"
+                         "zero ≜ λf.λx.x"
+                         "one ≜ λf.λx.f x"
+                         "two ≜ λf.λx.f (f x)"
+                         ""
+                         "some trickery:"
+                         "add1 ≜ λn.λf.λx.f (n f x)"
+                         ""
+                         "add1 (add1 (add1 two))"
+                         ""
+                         "but then the number kind of is its own eliminator or recursor or sth"
+                         ""
+                         "e.g. adding a and b together"
+                         "base case, a is zero, answer is b"
+                         "recursive case a is one more than sth, add one to result of sth plus b"
+                         ""
+                         "                   base"
+                         "         recursive  |"
+                         "                |   |"
+                         "                V   V"
+                         "plus ≜ λa.λb.a add1 b"
+                         ""
+                         "plus two two"))
+
 (define little (list
                 (static-image "imgs/ls.png")
                 "The Little Schemer uses"
@@ -189,12 +213,12 @@
                  (static-image "imgs/c.png")))
 
 (define summary? (list "1. type checkers tend not to like λx.x x"
-                      "2. (λx.x x) (λx.x x) goes on and on"
-                      "3. (more than) as many foos as we want"
-                      "(λx.x x) (λx.foo (x x))"
-                      "4. abstraction"
-                      "λf.(λx.x x) (λx.f (x x))"
-                      "5. eval into Y"))
+                       "2. (λx.x x) (λx.x x) goes on and on"
+                       "3. (more than) as many foos as we want"
+                       "(λx.x x) (λx.foo (x x))"
+                       "4. abstraction"
+                       "λf.(λx.x x) (λx.f (x x))"
+                       "5. eval into Y"))
 
 (define some-functions? (list
                          "multiplication?"
@@ -238,6 +262,12 @@
                     ""
                     ""))
 
+(define links? (list "code: https://github.com/Glorp/lambs"
+                     "some lambdas"
+                     "   http://llama-the-ultimate.org/lambdas.html"
+                     "or http://llama-the-ultimate.org/lists/lambs.html or sth"))
+                     
+
 (define Y (list "Y ≜ λf.(λx.f (x x)) (λx.f (x x))"))
 
 (define cheat (list "Y ≜ λf.(λx.f (x x)) (λx.f (x x))"
@@ -265,6 +295,7 @@
   `#hash((hello . ,hello)
          (halp . ,halp)
          (rules . ,rules)
+         (churchnums . ,churchnums)
          (little . ,little)
          (ruleses . ,ruleses)
          (plusses . ,plusses)

@@ -22,6 +22,8 @@ Then, for instructions, cursor on the line below and do <C-return>:
 
 :slide rules
 
+:slide churchnums
+
 :slide little
 
 :slide ruleses
@@ -65,3 +67,5 @@ Then, for instructions, cursor on the line below and do <C-return>:
 :slide real-world
 
 *~*~*~*~*~*~*~*~*
+
+:slide links?
