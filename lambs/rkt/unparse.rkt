@@ -6,7 +6,7 @@
   (~a "(" s ")"))
 
 (define (unother n [args '()])
-  (foldr (λ (a b) (app b a)) (ref n) args))
+  (foldr (λ (a b) (app b a)) (ref n) (reverse args)))
 
 (define (unparse x)
   (match x
